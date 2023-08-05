@@ -1,0 +1,33 @@
+<h1>Flights</h1>
+
+<%= form_tag root_path, method: :get do %>
+  <label for="departure_airport_id">Departure Airport:</label>    
+  <%= select_tag 'departure_airport_id', 
+  options_from_collection_for_select(@airports, :id, :code, params[:departure_airport_id]), include_blank: true %>
+
+  <label for="arrival_airport_id">Arrival Airport:</label>
+  <%= select_tag 'arrival_airport_id', options_from_collection_for_select(@airports, :id, :code, params[:arrival_airport_id]), include_blank: true %>
+  <%= submit_tag 'Search' %>
+<% end %> 
+
+<table>
+  <thead>
+    <tr>
+      <th>Departure Airport</th>
+      <th>Arrival Airport</th>
+      <th>Start Datetime</th>
+      <th>Flight Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |flight| %>
+      <tr>  
+        <td><%= flight.departure_airport.code%></td>  
+        <td><%= flight.arrival_airport.code%></td> 
+        <td><%= flight.start_datetime %></td>
+        <td><%= flight.flight_duration %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
