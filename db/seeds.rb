@@ -22,12 +22,14 @@ Flight.create(
   departure_airport: Airport.find_by(code: 'IKJ'),
   arrival_airport: Airport.find_by(code: 'CAL'),
   start_datetime: Time.now,
-  flight_duration: 120 
+  flight_duration: 120,
+  passenger_count: 3 
 )
 
 Flight.create(
   departure_airport: Airport.find_by(code: 'BN'),
   arrival_airport: Airport.find_by(code: 'ABJ'),
   start_datetime: Time.now + 1.day,
-  flight_duration: 90 
+  flight_duration: 90,
+  passenger_count: 4 
 )

@@ -18,24 +18,47 @@
   <%= submit_tag 'Search' %>
 <% end %> 
 
-<table>
-  <thead>
-    <tr>
-      <th>Departure Airport</th>
-      <th>Arrival Airport</th>
-      <th>Start Datetime</th>
-      <th>Flight Duration</th>
-    </tr>
-  </thead>
-  <tbody>
+<br>
+
+<!--<%# if @flights.any? %>
+   <table>
+   <thead>
+       <tr>
+       <th>Departure Airport</th>
+       <th>Arrival Airport</th>
+       <th>Start Datetime</th>
+       <th>Flight Duration</th>
+       </tr>
+   </thead>
+   <tbody>
+       <%# @flights.each do |flight| %>
+       <tr>  
+           <td><%#= flight.departure_airport.code%></td>  
+           <td><%#= flight.arrival_airport.code%></td> 
+           <td><%#= flight.start_datetime %></td>
+           <td><%#= flight.flight_duration %></td> 
+       </tr>
+       <%# end %>
+   </tbody>
+   </table>
+<%# else %>
+<p>No flights found matching the search criteria.</p>
+<%# end %>-->
+
+<% if @flights.any? %>
+  <%= form_tag new_booking_path, method: :get do %>
     <% @flights.each do |flight| %>
-      <tr>  
-        <td><%= flight.departure_airport.code%></td>  
-        <td><%= flight.arrival_airport.code%></td> 
-        <td><%= flight.start_datetime %></td>
-        <td><%= flight.flight_duration %></td> 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <label>
+        <%= radio_button_tag 'flight_id', flight.id %>
+        <%= "#{flight.departure_airport.code} to #{flight.arrival_airport.code},
+            #{flight.start_datetime}, Duration: #{flight.flight_duration}, Passenger-count: #{flight.passenger_count}" %>
+      </label>  
+      <br>  
+    <% end %> 
+    <%= hidden_field_tag 'passenger_count', params[:passenger_count] %>  
+    <%= submit_tag "Select" %>
+  <% end %>
+<% else %>
+  <p>No flights found matching the search criteria.</p>
+<% end %>
 
