@@ -6,7 +6,15 @@
   options_from_collection_for_select(@airports, :id, :code, params[:departure_airport_id]), include_blank: true %>
 
   <label for="arrival_airport_id">Arrival Airport:</label>
-  <%= select_tag 'arrival_airport_id', options_from_collection_for_select(@airports, :id, :code, params[:arrival_airport_id]), include_blank: true %>
+  <%= select_tag 'arrival_airport_id',
+   options_from_collection_for_select(@airports, :id, :code, params[:arrival_airport_id]), include_blank: true %>
+
+   <label for="passenger_count">Number of Passengers:</label>
+   <%= select_tag 'passenger_count', options_for_select([1, 2, 3, 4], params[:passenger_count].to_i), include_blank: true %>
+
+   <label for='flight_date'>Flight Date:</label>
+   <%= select_date(Date.current, prefix: 'flight_date') %>
+
   <%= submit_tag 'Search' %>
 <% end %> 
 
