@@ -1,0 +1,7 @@
+<h1>New Booking</h1>
+
+<p>Selected Flight: <%= @flight.departure_airport.code %> to <%= @flight.arrival_airport.code %>, 
+  <%= @flight.start_datetime %>, Duration: <%= @flight.flight_duration %>
+</p>
+
+<p>Number of Passengers: <%= @flight.passenger_count %></p>
