@@ -5,3 +5,22 @@
 </p>
 
 <p>Number of Passengers: <%= @flight.passenger_count %></p>
+
+<%= form_with(model: @booking, url: bookings_path) do |form| %>
+  <div>
+    <%= form.label :flight_id %>
+    <%= form.select :flight_id, options_for_select(@flights_with_codes) %>
+  </div>
+
+  <div>
+    <%= form.label :passenger_id %>
+    <%= form.select :passenger_id, options_for_select(@passengers.map { |passenger| [passenger.name, passenger.id] }) %>
+  </div>
+
+  
+  <div>
+    <%= form.label :passenger_count %>
+    <%= form.number_field :passenger_count, min: 1, max: 4 %>
+  </div>
+  <%= form.submit "Create Booking" %>
+<% end %>
